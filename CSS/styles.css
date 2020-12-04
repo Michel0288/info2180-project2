@@ -1,0 +1,253 @@
+/*All styling to each Page*/
+/*stylings for header and side panel begins here*/
+.headerGrid {
+    background-color: black;
+    color: white;
+    height: 60px;
+}
+
+header img {
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    background-color: yellow;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.headerGrid {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.asideGrid {
+    grid-column: 1;
+    background-color: gray;
+    min-height: 100%;
+    padding-bottom: 230px
+}
+
+.bol {
+    display: block;
+}
+
+.bodyGrid {
+    grid-column: 2;
+    background-color: blue;
+    min-height: 100%;
+    padding-bottom: 230px;
+}
+
+input {
+    display: block;
+    padding: 10px;
+    width: 340px;
+    height: 10px;
+    margin-bottom: 15px;    font-size: 15px;
+    background: rgb(239, 243, 245);
+    border: 2px solid rgb(166, 185, 185);
+    border-radius: 5px;
+}
+
+form {
+    display: block;
+    padding: 20px;
+}
+
+h2{
+    font-size: 30px;
+    top: 15%;
+
+}
+
+img {
+    margin-top: 8px;
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+
+.bol {
+    display: block;
+}
+
+.filterOptions p{
+    display: inline;
+    font-weight: bolder;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.filterOptions input:nth-child(4){
+    width: 100px;
+}
+
+.filterOptions input{
+    display: inline;
+    background-color: white;
+    height: 25px;
+    width: 70px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bolder;
+    padding-bottom: 20px;
+    /* text-align: center; */
+}
+
+.filterOptions input:hover{
+    background-color: blue;
+    color: white;
+}
+
+.createIssueButton{
+    background-color: green;
+    text-decoration: none; 
+    color: white;
+    position: absolute;
+    top: 15%;
+    left: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+aside h2{
+    padding-left: 10px;
+}
+
+table{
+    padding-left: 10px;
+    margin-left: 10px;
+    border-collapse: collapse;
+}
+
+table th{
+    padding: 5px;
+    background-color: grey;
+    border: 2px solid black;
+}
+textarea{
+    display: block;
+    width: 360px;
+    margin-bottom: 15px;
+    height: 70px;
+    border-radius: 5px;
+
+}
+
+button {
+    padding: 8px;
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    width: 140px;
+    background-color: rgb(20, 96, 167);
+    color: white;
+}
+
+button:hover {
+    background-color: red;
+}
+
+a:hover {
+    color: red;
+} 
+
+label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+select{
+    display: block;
+    padding: 10px;
+    width: 370px;
+    height: 40px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    background: rgb(239, 243, 245);
+    border: 2px solid rgb(166, 185, 185);
+    border-radius: 5px;
+}
+
+.message{
+    float: left;
+    width: 700px;
+    margin-left: 10px;
+
+    /* position: absolute; */
+
+    
+}
+.insidemessage{
+    float: right;
+    padding: 20px;  
+    width: 220px;
+}
+
+.info{
+    border: 1px solid rgb(43, 42, 42);
+    background-color: grey;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.btn1{
+    display: block;
+    margin-top: 12px;
+    padding: 8px; 
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    width: 220px;
+    color: white;
+
+}
+
+.btn2{
+    display: block;
+    background-color: rgb(94, 231, 94);
+    /* padding: 8px; */
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    width: 220px;
+    color: white;
+    margin-top: 12px;
+
+}
+
+h3{
+    margin-top: 0%;
+    padding-top:0%;
+    margin-left: 10px;
+}
+
+.h2heading{
+    margin-bottom: 0px;
+}
+
+
+.message li{
+    color: black;
+    list-style-type: ">";
+    font-weight: bold;
+}
+
+.message li p{
+   color: grey;
+   padding-left: 10px;
+
+}
+

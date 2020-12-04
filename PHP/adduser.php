@@ -1,4 +1,5 @@
 <?php
+
 require_once 'databaseconfig.php';
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 // $password = 'password123';
@@ -20,9 +21,13 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     //check email 
     //rmbr check regex for email
     
-    $stmtt = $conn->query("INSERT INTO User(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
-    
+    $stmt = $conn->query("INSERT INTO User(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
 }
+// // remove all session variables
+// session_unset();
+
+// // destroy the session
+// session_destroy();
 
 
 ?>
@@ -35,40 +40,40 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFO2180 Lab 2</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 
 <body>
     <!-- <div class="container"> -->
     <div class="headerGrid">
         <header>
-            <img class="new1" src="download.png" alt="pic">
+            <img class="new1" src="../IMAGES/download.png" alt="pic">
             <h1>BugMe Issue Tracker</h1>
         </header>
     </div>
 
     <div class="asideGrid">
         <main>
-            <img class="bol" src="home.png" alt="home">
+            <img class="bol" src="../IMAGES/home.png" alt="home">
             <p>Home</p>
 
 
-            <img class="bol" src="user.png" alt="user">
+            <img class="bol" src="../IMAGES/user.png" alt="user">
             <p>Add User</p>
 
 
-            <img class="bol" src="plus.svg" alt="issue">
+            <img class="bol" src="../IMAGES/plus.svg" alt="issue">
             <p>New Issue</p>
 
 
-            <img class="bol" src="logout.png" alt="logout">
+            <img class="bol" src="../IMAGES/logout.png" alt="logout">
             <p>Logout</p>
         </main>
     </div>
 
     <div class="bodyGrid">
         <aside>
-            <form method="POST" action="http://localhost/info2180-project2/index.php">
+            <form method="POST" action="http://localhost/info2180-project2/PHP/adduser.php">
                 <h2>New User</h2>
                 <label>Firstname</label>
                 <input type="text" name="firstname" id="firstname" required>
