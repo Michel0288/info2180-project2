@@ -1,0 +1,1 @@
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON Tracker.* TO 'admin'@'localhost' IDENTIFIED BY 'password123';
