@@ -7,12 +7,18 @@
 }
 
 header .new1 {
-    padding
+    padding-left: 10px;
     width: 30px;
     height: 30px;
     border-radius: 100%;
+    padding-bottom: 8px;
 }
-
+.headerGrid header h1{
+    padding-left: 10px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
 body {
     margin: 0;
     padding: 0;
@@ -22,11 +28,7 @@ body {
     grid-template-rows: auto;
     font-family: Arial, Helvetica, sans-serif;
 }
-.headerGrid h1{
-    padding-right: 10px;
-    vertical-align: middle;
-    padding-bottom: 8px;
-}
+
 .headerGrid {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -43,10 +45,6 @@ body {
     display: block;
     color: black;
     top: 10px;
-}
-
-.bol {
-    display: block;
 }
 
 .bodyGrid {
@@ -79,15 +77,12 @@ h2{
 }
 
 img {
+    vertical-align: middle;
     margin-top: 8px;
     margin-left: 20px;
     width: 20px;
     height: 20px;
     float: left;
-}
-
-.bol {
-    display: block;
 }
 
 .filterOptions p{
@@ -97,8 +92,8 @@ img {
     padding-left: 10px;
 }
 
-.filterOptions input:nth-child(4){
-    width: 150px;
+.filterOptions input:nth-child(3){
+    width: 120px;
 }
 
 .filterOptions input{
@@ -148,30 +143,49 @@ table th{
     padding-right: 200px;
 }
 
-table td{
-    padding-right: 20px;
-    border-bottom: 1px solid grey;
+table th:nth-child(3){
+    text-align: center;
 }
 
-tab;e
+table td{
+    padding: 10px;
+    padding-right: 20px;
+    border-bottom: 2px solid grey;
+}
+
+table td p{
+    padding-right: 3px;
+    display: inline;
+}
+
+table td a{
+    display: inline;
+}
+
 
 table td:nth-child(3) {
     text-align: center;
 }
 
-.open{
-    background-color: green;
+.open p{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(26, 223, 0);
     color: white;
 }
 
-.closed{
-    background-color: red;
+.closed p{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 115, 0);
     color: white;
 }
 
-.progress{
-    background-color: yellow;
-    color: white;
+.progress p{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 234, 44);
+    color: black;
 }
 
 textarea{
@@ -289,252 +303,13 @@ h3{
 
 }
 
-a{
-    text-decoration: none;
-}
-table td{
-    
-    list-style-type: ">";
-    font-weight: bold;
-}
 #change{
     background-color: yellow;
 }
 
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
 a{
     text-decoration: none;
     list-style-type: ">";
     font-weight: bold;
 }
 
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-    list-style-type: ">";
-    font-weight: bold;
-}
-
-.message li p{
-   color: grey;
-   padding-left: 10px;
-
-}
-
-a{
-    text-decoration: none;
-}

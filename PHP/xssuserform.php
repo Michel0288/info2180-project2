@@ -61,7 +61,7 @@ foreach($result as $data){
     <div class="asideGrid">
         <main>
         <img class="bol" src="../IMAGES/home.png" alt="home">
-            <p><a href="../PHP/issues.php">Home</a></p>
+            <span><p><a href="../PHP/issues.php">Home</a></p></span>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">

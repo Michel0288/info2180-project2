@@ -63,7 +63,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="asideGrid">
         <main>
         <img class="bol" src="../IMAGES/home.png" alt="home">
-            <p><a href="../PHP/issues.php">Home</a></p>
+        <span><p><a href="../PHP/issues.php">Home</a></p></span>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
@@ -103,10 +103,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <?php foreach ($results as $data): ?>
                         <tr>
-                            <td><?= $data['id'];?><a href="../PHP/xssuserform.php?query=<?= $data['id']?>"><?=$data['title'];?></a></td>
+                            <td><p>#<?= $data['id'];?></p><a href="../PHP/xssuserform.php?query=<?= $data['id']?>"><?=$data['title'];?></a></td>
                             <td><?= $data['type']; ?></td>
-                            
-                            <td id = "change"><?= $data['status']; ?></td>
+                            <td class="<?= $data['status'];?>"><p><?= $data['status']; ?></p></td>
                             <td><?= $data['firstname']," ",$data['lastname']; ?></td>
                             <td><?= date('j-m-Y ',strtotime($data['created'])); ?></td>
                         </tr>
