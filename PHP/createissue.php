@@ -1,24 +1,63 @@
 <?php
     session_start();
-    echo $_SESSION['person'];
     require_once 'databaseconfig.php';
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
+    echo $_SESSION['person'];
+    $stmt=$conn->query("SELECT firstname,lastname  FROM User;");
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $user=$_SESSION['person'];
+    $stmtt=$conn->query("SELECT id FROM User WHERE email='$user';");
+ 
+
+    $getid_currentuser=$stmtt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach($getid_currentuser as $data){
+        $storeid_current=$data['id'];
+   
+    }
     if($_SERVER['REQUEST_METHOD']==='POST'){ 
+        
+
         $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_STRING);
         $description = filter_input(INPUT_POST,'description',FILTER_SANITIZE_STRING);
         
         $type = $_POST['type'];
         $priority = $_POST['priority'];
         $assigned = $_POST['assigned'];
+
+        $splitname = preg_split('/\s+/', $assigned);
+        $first= $splitname[0];
+        $last= $splitname[1];
+        echo $first;
+        echo $last;
+
+        $stmttt=$conn->query("SELECT id FROM User WHERE firstname='$first' AND lastname='$last';");
+
+        $getassignedid=$stmttt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($getassignedid as $data){
+            $storeassigned=$data['id'];
+            echo $storeassigned;
+        }
+        $stmt2 = $conn->query("INSERT INTO ISSUES (title,description,type,priority,status,assigned_to,created_by) VALUES ('$title','$description','$type','$priority','Open','$storeassigned','$storeid_current');");
+
     }
 
-    $stmt = $conn->query("INSERT INTO User(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
-    $user=$_SESSION['person'];
-    echo $user;
 
-    $stmt=$conn->query("SELECT firstname  FROM User;");
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+    // echo $user;
+
+
+
+    // $stmt=$conn->query("SELECT password FROM User where email='$user_email';");
+    // $stmt=$conn->query("SELECT firstname,lastname  FROM User WHERE email="$user";");
+
+    
+    // $stmt = $conn->query("INSERT INTO User(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,26 +81,25 @@
 
     <div class="asideGrid">
         <main>
-            <img class="bol" src="../IMAGES/home.png" alt="home">
-            <p>Home</p>
+        <img class="bol" src="../IMAGES/home.png" alt="home">
+            <p><a href="../PHP/issues.php">Home</a></p>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
-            <p>Add User</p>
-
+            <p><a href="../PHP/adduser.php">Add User</a></p>
 
             <img class="bol" src="../IMAGES/plus.svg" alt="issue">
-            <p>New Issue</p>
+            <p><a href="../PHP/createissue.php">New Issue</a></p>
 
 
             <img class="bol" src="../IMAGES/logout.png" alt="logout">
-            <p>Logout</p>
+            <p><a href="../PHP/logout.php">Logout</a></p>
         </main>
     </div>
 
     <div class="bodyGrid">
         <aside>
-            <form method="POST" action="http://localhost/info2180-project2/createissue.php">
+            <form method="POST" action="http://localhost/info2180-project2/PHP/createissue.php">
                 <h2>Create Issue</h2>
                 <label>Title</label>
                 <input type="text" name="title" id="title" required>
@@ -70,7 +108,7 @@
                 <label>Assigned To</label>
                 <select name="assigned" id="assigned" required>
                 <?php foreach($results as $options):?>
-                    <option value="names"><?= $options['firstname']; ?></option>
+                    <option ><?= $options['firstname']," ",$options['lastname']; ?></option>
                 <?php endforeach; ?>
                 </select>
                 <label>Type</label>

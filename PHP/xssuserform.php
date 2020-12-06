@@ -1,5 +1,42 @@
 <?php
 session_start();
+echo $_SESSION['person'];
+
+$query=$_GET['query'];
+require_once 'databaseconfig.php';
+$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+$stmt=$conn->query("SELECT id,title,created_by,created,type,description,assigned_to,priority,status FROM ISSUES WHERE id='$query';");
+$results=$stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($results as $data){
+    $assigned_user=$data['assigned_to'];
+    // echo $assigned_user;
+}
+
+foreach($results as $data){
+    $dates=$data['created'];
+    $date = strtotime($dates); 
+    $dateformated=date('F d, Y ', $date); 
+    $times=$data['created'];
+    $time = strtotime($times); 
+    $timeformated=date('g:iA', $time); 
+
+}
+
+$stmtt=$conn->query("SELECT firstname, lastname FROM User WHERE User.id='$assigned_user';");
+$results2=$stmtt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach($results as $data){
+    $created_by=$data['created_by'];
+}
+$stmt=$conn->query("SELECT firstname, lastname FROM User WHERE id='$created_by';");
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $data){
+    $fname=$data['firstname'];
+    $lname=$data['lastname'];
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,52 +60,58 @@ session_start();
 
     <div class="asideGrid">
         <main>
-            <img class="bol" src="../IMAGES/home.png" alt="home">
-            <p>Home</p>
+        <img class="bol" src="../IMAGES/home.png" alt="home">
+            <p><a href="../PHP/issues.php">Home</a></p>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
-            <p>Add User</p>
-
+            <p><a href="../PHP/adduser.php">Add User</a></p>
 
             <img class="bol" src="../IMAGES/plus.svg" alt="issue">
-            <p>New Issue</p>
+            <p><a href="../PHP/createissue.php">New Issue</a></p>
 
 
             <img class="bol" src="../IMAGES/logout.png" alt="logout">
-            <p>Logout</p>
+            <p><a href="../PHP/logout.php">Logout</a></p>
         </main>
     </div>
 
     <div class="bodyGrid">
         <aside>
-            <h2 class="h2heading">XSS Vulnerability in Add User Form</h2>
-            <h3>Issue #100</h3>
 
+            <?php foreach ($results as $data): ?>
+            <h2 class="h2heading"><?= $data['title']; ?></h2>
+            <h3>ISSUE # <?= $data['id']; ?></h3>
+          
             <div class="message">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, deserunt! Atque magni maxime repellendus, nulla sit eveniet. Nulla distinctio nobis corrupti illo consequatur similique! Delectus id praesentium est repellat, sequi sed ullam odio consequuntur laborum dolores quisquam iste nostrum aspernatur nesciunt doloribus molestias iusto nobis quibusdam explicabo minus consectetur maiores sapiente? Harum repudiandae culpa neque sed, ratione consequuntur quod illo hic aut delectus, velit necessitatibus perferendis iusto. Et doloremque ut excepturi architecto nihil officiis, aliquam cum, libero voluptas minus rem veritatis. Neque, repellendus ex? Soluta, aspernatur nobis quas similique laudantium est suscipit quibusdam architecto odit saepe magnam doloribus commodi porro eos sint fugiat accusantium molestiae pariatur quaerat nostrum quos ipsa. Doloribus aliquam commodi corrupti nam, asperiores soluta accusantium sapiente iste.</p>
+                <p><?= $data['description']; ?></p>
                 <ul>
-                    <li> <p> Issue created on November 1, 2019 at 4:30PM by Marsha Brady</p> </li> <!-- Actual date time and person must go here so edit this -->
+                    <li> <p> Issue created on <?= $dateformated; ?> at <?= $timeformated; ?> by <?= $fname,' ',$lname; ?></p> </li> <!-- Actual date time and person must go here so edit this -->
                     <li> <p> Last updated on November 8, 2019 at 10:00AM</p> </li> <!-- Actual data and time must go here so edit this --> 
                 </ul>
-               
+                <?php endforeach; ?>  
             </div>
             <div class=side>
                 <div class="insidemessage">
                     <div class="info">
                     <label>Assigned To</label>
-                    <p>Tom Brandy</p> <!-- Actual Person must go here so edit this -->
+                    <?php foreach ($results2 as $data): ?>
+                    <p><?= $data['firstname'],' ',$data['lastname']; ?></p> <!-- Actual Person must go here so edit this -->
+                    <?php endforeach; ?>  
                     <label>Type:</label>
-                    <p>Proposal</p> <!-- Actual type must go here so edit this -->
+                    <?php foreach ($results as $data): ?>
+                    <p><?= $data['type']; ?></p> <!-- Actual type must go here so edit this -->
                     <label>Priority:</label>
-                    <p>Major</p> <!-- Actual Priority must go here so edit this -->
+                    <p><?= $data['priority']; ?></p> <!-- Actual Priority must go here so edit this -->
                     <label>Status:</label>
-                    <p>Open</p> <!-- Actual Status must go here so edit this -->
-                    </div>
+                    <p><?= $data['status']; ?></p> <!-- Actual Status must go here so edit this -->
+                    <?php endforeach; ?>  
+                </div>
                     <div class="infobuttons">
                     <button class="btn1" value="submit">Mark as Closed</button>
                     <button class="btn2" value="submit">Mark In Progress</button>
                     </div> 
                 </div>
           </div>
+
 </html>

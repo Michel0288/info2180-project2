@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS Tracker;
 USE Tracker;
-CREATE TABLE User(
+CREATE TABLE Users(
     id INT AUTO_INCREMENT NOT NULL,
     firstname VARCHAR(255),
     lastname VARCHAR(255),
@@ -9,8 +9,8 @@ CREATE TABLE User(
     date_joined DATETIME  NOT NULL DEFAULT (NOW()),
     PRIMARY KEY(id)
 );
-CREATE TABLE ISSUES(
-    id INT NOT NULL,
+CREATE TABLE Issues(
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     description TEXT(300) NOT NULL,
     type VARCHAR(255) NOT NULL,

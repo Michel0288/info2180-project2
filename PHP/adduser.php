@@ -55,19 +55,18 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="asideGrid">
         <main>
             <img class="bol" src="../IMAGES/home.png" alt="home">
-            <p>Home</p>
+            <p><a href="../PHP/issues.php">Home</a></p>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
-            <p>Add User</p>
-
+            <p><a href="../PHP/adduser.php">Add User</a></p>
 
             <img class="bol" src="../IMAGES/plus.svg" alt="issue">
-            <p>New Issue</p>
+            <p><a href="../PHP/createissue.php">New Issue</a></p>
 
 
             <img class="bol" src="../IMAGES/logout.png" alt="logout">
-            <p>Logout</p>
+            <p><a href="../PHP/logout.php">Logout</a></p>
         </main>
     </div>
 

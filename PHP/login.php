@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require_once 'databaseconfig.php';
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         echo '<script type="text/JavaScript">  alert("SUCCESS"); </script>' ; 
         $_SESSION['person']=$user_email;
         echo $_SESSION['person'];
-        header("refresh:0;url= ../PHP/issuetrack.php");
+        header("refresh:0;url= ../PHP/issues.php");
         }else{
             echo 'Fail';
         }
@@ -36,6 +36,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFO2180 Lab 2</title>
     <link rel="stylesheet" href="../CSS/styles.css">
+    <script src="../JS/login.js"></script>
 </head>
 
 <body>
@@ -49,7 +50,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     <div class="asideGrid">
         <main>
-            <img class="bol" src="../IMAGES/home.png" alt="home">
+            <!-- <img class="bol" src="../IMAGES/home.png" alt="home">
             <p>Home</p>
 
 
@@ -62,7 +63,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 
             <img class="bol" src="../IMAGES/logout.png" alt="logout">
-            <p>Logout</p>
+            <p>Logout</p> -->
         </main>
     </div>
 
