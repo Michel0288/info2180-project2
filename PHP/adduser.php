@@ -1,35 +1,23 @@
 <?php
-
+session_start();
 require_once 'databaseconfig.php';
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-// $password = 'password123';
-// $hashedpass = password_hash($password, PASSWORD_DEFAULT);
-// $stmt = $conn->query("INSERT INTO User(password,email) VALUES ('$hashedpass','admin@project2.com');");
-
-if ($_SERVER['REQUEST_METHOD']==='POST'){
-    $f_name = filter_input(INPUT_POST,'firstname',FILTER_SANITIZE_STRING);
-    $l_name = filter_input(INPUT_POST,'lastname',FILTER_SANITIZE_STRING);
-    $pass_word = $_POST['password'];
-    $hashedpass2 = password_hash($pass_word, PASSWORD_DEFAULT);
-    $email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL);
-    
-    if(empty($f_name)||empty($l_name) ||empty($pass_word) ||empty($email)){
-        echo 'Please Enter Data in All Fields';
-        // exit();
+$p_regex="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+$emailtest = "/.{1,}@[^.]{1,}/";
+if ($_SESSION['person']=='admin@project2.com'){
+    if(!empty($_POST['firstname'])||!empty($_POST['lastname']) ||!empty($_POST['password']) ||!empty($_POST['email'])){
+        if ($_SERVER['REQUEST_METHOD']==='POST'){
+            if (preg_match ($p_regex, $_POST['password']) && preg_match ($emailtest, $_POST['email']) ){
+                $f_name = htmlspecialchars(filter_input(INPUT_POST,'firstname',FILTER_SANITIZE_STRING));
+                $l_name = htmlspecialchars(filter_input(INPUT_POST,'lastname',FILTER_SANITIZE_STRING));
+                $pass_word = htmlspecialchars(filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING));
+                $hashedpass2 = password_hash($pass_word, PASSWORD_DEFAULT);
+                $email = htmlspecialchars(filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL));             
+                $stmt = $conn->query("INSERT INTO Users(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
+            }
+        }
     }
-    //regex for email
-    //check email 
-    //rmbr check regex for email
-    
-    $stmt = $conn->query("INSERT INTO User(firstname,lastname,password,email) VALUES ('$f_name','$l_name','$hashedpass2','$email');");
 }
-// // remove all session variables
-// session_unset();
-
-// // destroy the session
-// session_destroy();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFO2180 Lab 2</title>
     <link rel="stylesheet" href="../CSS/styles.css">
+    <script src="../JS/adduser.js"></script>
 </head>
 
 <body>
-    <!-- <div class="container"> -->
     <div class="headerGrid">
         <header>
             <img class="new1" src="../IMAGES/download.png" alt="pic">
@@ -86,7 +74,5 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
             </form>
         </aside>
     </div>
-    <!-- </div> -->
 </body>
-
 </html>

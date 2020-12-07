@@ -1,5 +1,5 @@
 <?php
   session_start();
   session_destroy();
-  header("Location: ../PHP/login.php");   //redirect your page to login page
-?>
+  header("refresh:0;url= ../PHP/login.php");
+  ?>

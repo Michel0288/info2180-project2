@@ -1,16 +1,15 @@
 <?php
 session_start();
-echo $_SESSION['person'];
 
-$query=$_GET['query'];
+
+$query=htmlspecialchars($_GET['query']);
 require_once 'databaseconfig.php';
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-$stmt=$conn->query("SELECT id,title,created_by,created,type,description,assigned_to,priority,status FROM ISSUES WHERE id='$query';");
+$stmt=$conn->query("SELECT id,title,created_by,created,updated,type,description,assigned_to,priority,status FROM Issues WHERE id='$query';");
 $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($results as $data){
-    $assigned_user=$data['assigned_to'];
-    // echo $assigned_user;
+    $assigned_user=htmlspecialchars($data['assigned_to']);
 }
 
 foreach($results as $data){
@@ -20,23 +19,41 @@ foreach($results as $data){
     $times=$data['created'];
     $time = strtotime($times); 
     $timeformated=date('g:iA', $time); 
-
 }
 
-$stmtt=$conn->query("SELECT firstname, lastname FROM User WHERE User.id='$assigned_user';");
+
+foreach($results as $data){
+    $dates2=$data['updated'];
+    $date2 = strtotime($dates2); 
+    $dateformated2=date('F d, Y ', $date2); 
+    $times2=$data['updated'];
+    $time2 = strtotime($times2); 
+    $timeformated2=date('g:iA', $time2); 
+}
+
+$stmtt=$conn->query("SELECT firstname, lastname FROM Users WHERE Users.id='$assigned_user';");
 $results2=$stmtt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($results as $data){
-    $created_by=$data['created_by'];
+    $created_by=htmlspecialchars($data['created_by']);
 }
-$stmt=$conn->query("SELECT firstname, lastname FROM User WHERE id='$created_by';");
+$stmt=$conn->query("SELECT firstname, lastname FROM Users WHERE id='$created_by';");
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($result as $data){
-    $fname=$data['firstname'];
-    $lname=$data['lastname'];
+    $fname=htmlspecialchars($data['firstname']);
+    $lname=htmlspecialchars($data['lastname']);
 
 }
+if(isset($_POST['closed'])){
+    $stmt3=$conn->query("UPDATE  Issues SET status='Closed' WHERE id='$query';");
+    $stmt = $conn->query("UPDATE  Issues SET updated=NOW() WHERE id='$query';");
 
+}
+if(isset($_POST['progress'])){
+    $stmt3=$conn->query("UPDATE  Issues SET status='In Progress' WHERE id='$query';");
+    $stmt = $conn->query("UPDATE  Issues SET updated=NOW() WHERE id='$query';");
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +67,6 @@ foreach($result as $data){
 </head>
 
 <body>
-    <!-- <div class="container"> -->
     <div class="headerGrid">
         <header>
             <img class="new1" src="../IMAGES/download.png" alt="pic">
@@ -61,7 +77,7 @@ foreach($result as $data){
     <div class="asideGrid">
         <main>
         <img class="bol" src="../IMAGES/home.png" alt="home">
-            <span><p><a href="../PHP/issues.php">Home</a></p></span>
+            <p><a href="../PHP/issues.php">Home</a></p>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
@@ -87,7 +103,7 @@ foreach($result as $data){
                 <p><?= $data['description']; ?></p>
                 <ul>
                     <li> <p> Issue created on <?= $dateformated; ?> at <?= $timeformated; ?> by <?= $fname,' ',$lname; ?></p> </li> <!-- Actual date time and person must go here so edit this -->
-                    <li> <p> Last updated on November 8, 2019 at 10:00AM</p> </li> <!-- Actual data and time must go here so edit this --> 
+                    <li> <p> Last updated on <?= $dateformated2; ?> at <?= $timeformated2; ?></p> </li> <!-- Actual data and time must go here so edit this --> 
                 </ul>
                 <?php endforeach; ?>  
             </div>
@@ -106,12 +122,14 @@ foreach($result as $data){
                     <label>Status:</label>
                     <p><?= $data['status']; ?></p> <!-- Actual Status must go here so edit this -->
                     <?php endforeach; ?>  
-                </div>
-                    <div class="infobuttons">
-                    <button class="btn1" value="submit">Mark as Closed</button>
-                    <button class="btn2" value="submit">Mark In Progress</button>
-                    </div> 
-                </div>
+                <form action="../PHP/xssuserform.php?query=<?= $query?>" method="POST">
+                    </div>
+                        <div class="infobuttons">
+                        <button class="btn1" name ="closed" value="submit">Mark as Closed</button>
+                        <button class="btn2" name="progress" value="submit">Mark In Progress</button>
+                        </div> 
+                    </div>
+                </form>
           </div>
 
 </html>

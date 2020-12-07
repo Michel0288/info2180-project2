@@ -1,23 +1,20 @@
 <?php
 session_start();
-echo $_SESSION['person'];
 require_once 'databaseconfig.php';
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-$stmt=$conn->query("SELECT User.firstname, User.lastname,ISSUES.id,ISSUES.title,ISSUES.type,ISSUES.status,ISSUES.created FROM User INNER JOIN ISSUES ON User.id=ISSUES.assigned_to;");
+$stmt=$conn->query("SELECT Users.firstname, Users.lastname,Issues.id,Issues.title,Issues.type,Issues.status,Issues.created FROM Users INNER JOIN Issues ON Users.id=Issues.assigned_to;");
 $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
 if(isset($_POST['ALL'])){
-    //ALL
-    $stmt=$conn->query("SELECT User.firstname, User.lastname,ISSUES.id,ISSUES.title,ISSUES.type,ISSUES.status,ISSUES.created FROM User INNER JOIN ISSUES ON User.id=ISSUES.assigned_to;");
+    $stmt=$conn->query("SELECT Users.firstname, Users.lastname,Issues.id,Issues.title,Issues.type,Issues.status,Issues.created FROM Users INNER JOIN Issues ON Users.id=Issues.assigned_to;");
     $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
-    //ALL
 }
 
 
 if(isset($_POST['TICKETS'])){
 //SPECIFIC USER
 $user=$_SESSION['person'];
-$stmtt=$conn->query("SELECT id FROM User WHERE email='$user';");
+$stmtt=$conn->query("SELECT id FROM Users WHERE email='$user';");
 
 
 $getid_currentuser=$stmtt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +24,7 @@ foreach($getid_currentuser as $data){
 
 }
 
-$stmt=$conn->query("SELECT User.firstname, User.lastname,ISSUES.id,ISSUES.title,ISSUES.type,ISSUES.status,ISSUES.created FROM User INNER JOIN ISSUES ON User.id=ISSUES.assigned_to WHERE User.id='$storeid_current';");
+$stmt=$conn->query("SELECT Users.firstname, Users.lastname,Issues.id,Issues.title,Issues.type,Issues.status,Issues.created FROM Users INNER JOIN Issues ON Users.id=Issues.assigned_to WHERE Users.id='$storeid_current';");
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //SPECIFIC USER
 }
@@ -35,7 +32,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_POST['OPEN'])){
 //OPEN 
-$stmt=$conn->query("SELECT User.firstname, User.lastname,ISSUES.id,ISSUES.title,ISSUES.type,ISSUES.status,ISSUES.created FROM User INNER JOIN ISSUES ON User.id=ISSUES.assigned_to WHERE ISSUES.status='Open';");
+$stmt=$conn->query("SELECT Users.firstname, Users.lastname,Issues.id,Issues.title,Issues.type,Issues.status,Issues.created FROM Users INNER JOIN Issues ON Users.id=Issues.assigned_to WHERE Issues.status='Open';");
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //OPEN
 }
@@ -63,7 +60,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="asideGrid">
         <main>
         <img class="bol" src="../IMAGES/home.png" alt="home">
-        <span><p><a href="../PHP/issues.php">Home</a></p></span>
+            <span><p><a href="../PHP/issues.php">Home</a></p></span>
 
 
             <img class="bol" src="../IMAGES/user.png" alt="user">
